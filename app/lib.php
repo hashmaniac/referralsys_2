@@ -60,7 +60,7 @@ class DB {
                 }
             }
         } else {
-            $result = $this->stmt->fetch_assoc();
+            $result = $this->stmt->fetch_all();
         }
         $this->stmt = null;
         return count($result) == 0 ? false : $result; 
