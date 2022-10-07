@@ -82,5 +82,8 @@ class DB {
                 $result = $row;
             }
         }
+
+        $this->conn->stmt = null;
+        return count($result) == 0 ? false : $result;
     }
 }
