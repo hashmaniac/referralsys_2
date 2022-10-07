@@ -3,7 +3,6 @@
 class DB {
     private $conn = null;
     private $stmt = null;
-    public $lastID = null;
 
     function __construct () {
         // __construct() : connect to database
