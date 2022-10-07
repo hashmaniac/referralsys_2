@@ -7,6 +7,7 @@ class DB {
 
     function __construct () {
         // __construct() : connect to database
+        //PARAM : DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
 
         //Create connection
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -37,6 +38,11 @@ class DB {
     }
 
     function fetchAll ($sql, $cond=null, $key=null, $value=null) {
+        // fetchAll() : performs select query, multipe rows expected
+        //PARAM : $sql : SQl query
+        //        $cond : array of conditions
+        //        $key : sort in key=>data order, optional
+        //        $value : key must be provided. if string provided, sort in key=>value order, if function, custom sort
 
         $result = [];
 
@@ -59,14 +65,20 @@ class DB {
                     $result[$row[$key]] = $row;
                 }
             }
+            //no key-value order
         } else {
             $result = $this->stmt->fetch_all();
         }
+        //return result
         $this->stmt = null;
         return count($result) == 0 ? false : $result; 
     }
 
     function fetch ($sql, $cond=null, $sort=null) {
+        //fetch() : perform selct query, single row expected
+        //PARAM : $sql : SQL query
+        //        $cond : array of conditions
+        //        $sort : custom sort function
 
         $result = [];
 
@@ -82,7 +94,7 @@ class DB {
                 $result = $row;
             }
         }
-
+        //return result
         $this->conn->stmt = null;
         return count($result) == 0 ? false : $result;
     }
