@@ -51,22 +51,22 @@ class DB {
         if(isset($key)) {
             if(isset($value)) {
                 if(is_callable($value)) {
-                    while($row = $this->stmt->fetch_assoc()) {
+                    while($row = $this->stmt->fetch(MYSQLI_ASSOC)) {
                         $result[$row[$key]]  = $value($row);
                     }
                 } else {
-                    while($row = $this->stmt->fetch_assoc()) {
+                    while($row = $this->stmt->fetch(MYSQLI_ASSOC)) {
                         $result[$row[$key]] = $row[$value];
                     }
                 }
             } else {
-                while($row = $this->stmt->fetch_assoc()) {
+                while($row = $this->stmt->fetch(MYSQLI_ASSOC)) {
                     $result[$row[$key]] = $row;
                 }
             }
             //no key-value order
         } else {
-            $result = $this->stmt->fetch_all();
+            $result = $this->stmt->fetch();
         }
         //return result
         $this->stmt = null;
@@ -85,11 +85,11 @@ class DB {
         $this->stmt->execute($cond);
 
         if(is_callable($sort)) {
-            while($row = $this->stmt->fetch_assoc()) {
+            while($row = $this->stmt->fetch(MYSQLI_ASSOC)) {
                 $result = $sort($row);
             }
         } else {
-            while($row = $this->stmt->fetch_assoc()) {
+            while($row = $this->stmt->fetch(MYSQLI_ASSOC)) {
                 $result = $row;
             }
         }
