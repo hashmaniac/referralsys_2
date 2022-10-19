@@ -28,7 +28,7 @@ class DB {
          $this->stmt = $this->conn->prepare($sql);
          $this->stmt->execute($data);
 
-         if($conn->query($sql) == FALSE) {
+         if($this->conn->query($sql) == FALSE) {
             $this->error = $this->conn->connect_error;
             return false;
          }
