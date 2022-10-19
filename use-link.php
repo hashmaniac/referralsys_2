@@ -8,7 +8,7 @@ $libDB = new DB();
 session_start();
 
 //Redirect link
-$redirect = "https://localhost/use-link.php"
+$redirect = "https://localhost/use-link.php";
 
 // Verify referral link
 if($_GET['ref']) {
